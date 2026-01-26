@@ -1,0 +1,22 @@
+---
+import { content } from "~/data/content";
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-theme_content_bg">
+  <div class="container">
+    <div class="xl:grid xl:grid-cols-3 xl:gap-8"></div>
+
+    <div
+      class="mt-8 border-t border-gray-800/10 pt-4 pb-4 md:flex md:items-center md:justify-between"
+    >
+      <div class="flex gap-x-6 md:order-2">
+        <!-- <SocialMediaIcons /> -->
+      </div>
+      <p class="text-sm/6 text-gray-600 ml-4">
+        &copy; {year}
+        {content.company.name}. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,12 @@
+---
+import "~/styles/global.css";
+import Layout from "~/layouts/Layout.astro";
+import { GalleryCarousel } from "~/components/GalleryCarousel";
+---
+
+<Layout pageTitle="About">
+  <!-- Content container -->
+  <div class="p-8 text-theme_text_dark max-w-2xl">
+    <GalleryCarousel client:only="react" />
+  </div>
+</Layout>

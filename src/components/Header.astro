@@ -1,0 +1,46 @@
+---
+import { content } from "~/data/content.ts";
+
+import { MobileMenu } from "~/components/MobileMenu";
+
+const pathname = Astro.url.pathname;
+---
+
+<header>
+  <div class="bg-theme_header p-4 lg:p-8 flex justify-between items-center">
+    <!-- TODO: MAKE THIS DIV ^ A CONTAINER? -->
+    <a href="/" class="flex items-center">
+      <span class="font-bold text-2xl lg:text-4xl">{content.company.name}</span>
+    </a>
+
+    <!-- Desktop Nav Bar -->
+    <nav class="hidden lg:flex items-center">
+      <ul class="flex gap-4">
+        {
+          content.pages.map((page) => (
+            <li>
+              <a
+                href={`.${page.url}`}
+                class={`text-2xl ${
+                  pathname === page.url
+                    ? "font-bold"
+                    : "hover:text-gray-500 font-medium"
+                }`}
+              >
+                {page.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <!-- Mobile Nav Bar -->
+    <nav class="lg:hidden flex">
+      <MobileMenu
+        client:only="react"
+        pages={content.pages}
+        pathname={pathname}
+      />
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,145 @@
+---
+import { content } from "~/data/content.ts";
+
+const rmTrailingSlash = (path: string): string => {
+  return path.endsWith("/") && path.length > 1
+    ? path.slice(0, path.length - 1)
+    : path;
+};
+
+const pathname = rmTrailingSlash(Astro.url.pathname);
+---
+
+<header>
+  <section class="bg-yellow-200">
+    <div class="container py-4 lg:py-8 flex justify-between items-center">
+      <a href="/" class="flex items-center gap-x-2">
+        <span class="font-bold text-2xl lg:text-4xl"
+          >{content.company.name}</span
+        >
+      </a>
+
+      <!-- Desktop Menu -->
+      <nav class="hidden lg:flex items-center gap-x-12">
+        <!-- {
+          menuMain.map((item) => (
+            <div class="relative group">
+              <a
+                href={item.url}
+                class={`border-b-2 transition border-transparent ${
+                  pathname === item.url
+                    ? "font-bold"
+                    : "hover:border-gray-800 font-medium"
+                }`}
+                aria-haspopup={item.submenu ? "true" : "false"}
+                aria-expanded={item.submenu ? "false" : undefined}
+              >
+                {item.label}
+              </a>
+              {item.submenu && (
+                <div class="absolute top-full -mt-4 pt-4 -left-4 z-50 translate-y-4 w-screen max-w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
+                  <div class="bg-white rounded-lg ring-1 shadow-md ring-gray-900/5 overflow-hidden">
+                    {item.submenu.map((subItem) => (
+                      <a
+                        href={subItem.url}
+                        class={`block px-4 py-3 text-base hover:bg-gray-100 ${
+                          pathname === subItem.url ? "font-bold" : "font-medium"
+                        }`}
+                      >
+                        {subItem.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))
+        } -->
+        <a href="/contact" class="button button-black ml-8">Contact</a>
+      </nav>
+
+      <!-- Mobile Hamburger -->
+      <div class="lg:hidden flex items-center gap-x-4">
+        <button
+          id="mobile-menu-toggle"
+          class="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+          aria-label="Toggle Menu"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Dropdown -->
+    <nav id="mobile-menu" class="lg:hidden bg-yellow-100 hidden">
+      <div class="flex flex-col p-4 gap-2">
+        <!-- {
+          menuMain.map((item) => (
+            <div class="flex flex-col">
+              <a
+                href={item.url}
+                class={`py-2 px-4 ${
+                  pathname === item.url
+                    ? "font-bold bg-yellow-200"
+                    : "font-medium"
+                } rounded-md`}
+              >
+                {item.label}
+              </a>
+              {item.submenu && (
+                <div class="ml-4 flex flex-col gap-1">
+                  {item.submenu.map((subItem) => (
+                    <a
+                      href={subItem.url}
+                      class={`py-2 px-4 ${
+                        pathname === subItem.url
+                          ? "font-bold bg-yellow-200"
+                          : "font-medium"
+                      } rounded-md`}
+                    >
+                      {subItem.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))
+        } -->
+
+        <a href="/contact" class="button button-black mt-2">Contact</a>
+      </div>
+    </nav>
+  </section>
+
+  <script>
+    const toggleBtn = document.getElementById("mobile-menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    let isOpen = false;
+    if (toggleBtn && mobileMenu) {
+      toggleBtn.addEventListener("click", () => {
+        isOpen = !isOpen;
+        mobileMenu.classList.toggle("hidden", !isOpen);
+
+        // Toggle hamburger / close icon
+        const path = toggleBtn.querySelector("path");
+        if (isOpen && path) {
+          path.setAttribute("d", "M6 18L18 6M6 6l12 12"); // X icon
+        } else if (path) {
+          path.setAttribute("d", "M4 6h16M4 12h16M4 18h16"); // Hamburger icon
+        }
+      });
+    }
+  </script>
+</header>

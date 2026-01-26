@@ -1,0 +1,30 @@
+---
+import "~/styles/global.css";
+import Layout from "~/layouts/Layout.astro";
+import { content } from "~/data/content";
+import ShaneImageSrc from "~/assets/images/shane.jpg";
+import { Image } from "astro:assets";
+---
+
+<Layout pageTitle="About">
+  <section class="flex-1">
+    <!-- Content container -->
+    <div class="p-8 text-theme_text_dark lg:flex gap-12">
+      <div class="max-w-xl">
+        <h1 class="mb-8 text-4xl lg:text-7xl">About Us</h1>
+        {
+          content.pages[1].aboutContent
+            ?.split(/\n\s*\n/)
+            .map((paragraph) => <p class="mb-4">{paragraph}</p>)
+        }
+      </div>
+      <div class="mt-12">
+        <Image
+          src={ShaneImageSrc}
+          alt="Shane Waldvogel"
+          class:list={"w-full max-w-md lg:max-w-lg h-auto object-cover"}
+        />
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,37 @@
+---
+import "~/styles/global.css";
+import Layout from "~/layouts/Layout.astro";
+import houseImageSrc from "~/assets/images/house.jpg";
+import { Image } from "astro:assets";
+import { content } from "~/data/content";
+import ContactForm from "~/components/ContactForm.astro";
+---
+
+<Layout pageTitle="Home">
+  <section class="relative flex-1">
+    <!-- Background image -->
+    <Image
+      src={houseImageSrc}
+      alt="Heading background"
+      class:list="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gray-800/80"></div>
+
+    <!-- Content container -->
+    <div class="p-8 lg:p-12 relative z-10 text-theme_text_light lg:flex gap-16">
+      <!-- Hero content -->
+      <div class="mb-12">
+        <h1 class="text-4xl lg:text-7xl my-6 lg:my-12">
+          {content.pages[0].hero}
+        </h1>
+        <h2>
+          {content.pages[0].subHero}
+        </h2>
+      </div>
+      <!-- Contact form -->
+      <div class="bg-white text-black px-8 py-4 rounded-lg max-w-md lg:w-md">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</Layout>

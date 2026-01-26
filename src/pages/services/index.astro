@@ -1,0 +1,21 @@
+---
+import "~/styles/global.css";
+import Layout from "~/layouts/Layout.astro";
+import { content } from "~/data/content";
+---
+
+<Layout pageTitle="About">
+  <section class="flex-1">
+    <!-- Content container -->
+    <div class="p-8 text-theme_text_dark max-w-xl">
+      <h1 class="mb-8 text-4xl lg:text-7xl">Our Services</h1>
+      <ul class="text-lg grid grid-cols-1 gap-y-2 gap-x-12 sm:grid-cols-3">
+        {
+          content.pages[2].servicesContent?.map((service) => (
+            <li>- {service}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>
