@@ -31,7 +31,7 @@ export function MobileMenu({ pages, pathname }: MobileMenuProps) {
         >
           <img
             src={MenuIcon.src ?? MenuIcon}
-            className="h-8 w-8 hover:cursor-pointer"
+            className="h-8 w-8 hover:cursor-pointer pointer-events-none"
             alt=""
             draggable={false}
           />
