@@ -33,7 +33,7 @@ export function MobileMenu({ pages, pathname }: MobileMenuProps) {
           {pages.map((page) => (
             <a
               key={page.title}
-              href={`.${page.url}`}
+              href={`${import.meta.env.BASE_URL}${page.url.replace(/^\//, "")}`}
               className={`${
                 pathname === page.url
                   ? "font-bold"
