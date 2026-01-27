@@ -24,11 +24,16 @@ export function MobileMenu({ pages, pathname }: MobileMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button>
+        <button
+          type="button"
+          aria-label="Open menu"
+          className="p-2 rounded-md active:scale-95"
+        >
           <img
             src={MenuIcon.src ?? MenuIcon}
             className="h-8 w-8 hover:cursor-pointer"
             alt=""
+            draggable={false}
           />
         </button>
       </DropdownMenuTrigger>
@@ -38,19 +43,22 @@ export function MobileMenu({ pages, pathname }: MobileMenuProps) {
             const href = `${import.meta.env.BASE_URL.replace(/\/$/, "")}${page.url}`;
 
             return (
-              <a
-                key={page.title}
-                href={href}
-                className={
-                  cleanPathname === page.url
-                    ? "font-bold"
-                    : "hover:text-gray-500 font-medium"
-                }
+              <DropdownMenuItem
+                className="text-2xl hover:cursor-pointer"
+                asChild
               >
-                <DropdownMenuItem className="text-2xl hover:cursor-pointer">
+                <a
+                  key={page.title}
+                  href={href}
+                  className={
+                    cleanPathname === page.url
+                      ? "font-bold"
+                      : "hover:text-gray-500 font-medium"
+                  }
+                >
                   {page.title}
-                </DropdownMenuItem>
-              </a>
+                </a>
+              </DropdownMenuItem>
             );
           })}
         </DropdownMenuGroup>
