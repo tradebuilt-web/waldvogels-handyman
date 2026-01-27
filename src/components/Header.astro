@@ -4,6 +4,8 @@ import { content } from "~/data/content.ts";
 import { MobileMenu } from "~/components/MobileMenu";
 
 const pathname = Astro.url.pathname;
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+const cleanPathname = pathname.replace(basePath, "") || "/";
 ---
 
 <header>
@@ -17,20 +19,24 @@ const pathname = Astro.url.pathname;
     <nav class="hidden lg:flex items-center">
       <ul class="flex gap-4">
         {
-          content.pages.map((page) => (
-            <li>
-              <a
-                href={`${import.meta.env.BASE_URL}${page.url.replace(/^\//, "")}`}
-                class={`text-2xl ${
-                  pathname === page.url
-                    ? "font-bold"
-                    : "hover:text-gray-500 font-medium"
-                }`}
-              >
-                {page.title}
-              </a>
-            </li>
-          ))
+          content.pages.map((page) => {
+            const href = `${import.meta.env.BASE_URL.replace(/\/$/, "")}${page.url}`;
+
+            return (
+              <li>
+                <a
+                  href={href}
+                  class={`text-2xl ${
+                    cleanPathname === page.url
+                      ? "font-bold"
+                      : "hover:text-gray-500 font-medium"
+                  }`}
+                >
+                  {page.title}
+                </a>
+              </li>
+            );
+          })
         }
       </ul>
     </nav>
