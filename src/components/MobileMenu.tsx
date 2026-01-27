@@ -44,11 +44,11 @@ export function MobileMenu({ pages, pathname }: MobileMenuProps) {
 
             return (
               <DropdownMenuItem
+                key={page.title}
                 className="text-2xl hover:cursor-pointer"
                 asChild
               >
                 <a
-                  key={page.title}
                   href={href}
                   className={
                     cleanPathname === page.url

@@ -42,11 +42,7 @@ const cleanPathname = pathname.replace(basePath, "") || "/";
     </nav>
     <!-- Mobile Nav Bar -->
     <nav class="lg:hidden flex">
-      <MobileMenu
-        client:only="react"
-        pages={content.pages}
-        pathname={pathname}
-      />
+      <MobileMenu client:load pages={content.pages} pathname={pathname} />
     </nav>
   </div>
 </header>
