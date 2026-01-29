@@ -7,12 +7,12 @@ import { content } from "~/data/content";
 <Layout pageTitle="About">
   <section class="flex-1">
     <!-- Content container -->
-    <div class="p-8 text-theme_text_dark max-w-xl">
+    <div class="p-6 sm:p-8 text-theme_text_dark w-full max-w-3xl mx-auto">
       <h1 class="mb-8 text-4xl lg:text-7xl">Our Services</h1>
-      <ul class="text-lg grid grid-cols-1 gap-y-2 gap-x-12 sm:grid-cols-3">
+      <ul class="text-lg flex flex-col gap-4">
         {
-          content.pages[2].servicesContent?.map((service) => (
-            <li>- {service}</li>
+          content.pages[2].servicesContent?.map((service, index) => (
+            <li class="border-b border-theme_text_dark p-2 ">{service}</li>
           ))
         }
       </ul>

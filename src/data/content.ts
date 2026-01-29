@@ -11,7 +11,7 @@ export const content = {
   company: {
     name: `Waldvogel's Handyman`,
     phone: `(505) 402-8253`,
-    email: `johndoe@gmail.com`,
+    email: ``,
     address: {
       street: `123 Main St.`,
       city: `Farmington`,

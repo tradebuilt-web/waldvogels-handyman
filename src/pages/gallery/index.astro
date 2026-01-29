@@ -1,12 +1,27 @@
 ---
-import "~/styles/global.css";
 import Layout from "~/layouts/Layout.astro";
 import { GalleryCarousel } from "~/components/GalleryCarousel";
 ---
 
-<Layout pageTitle="About">
-  <!-- Content container -->
-  <div class="p-8 text-theme_text_dark max-w-2xl">
-    <GalleryCarousel client:only="react" />
-  </div>
+<Layout pageTitle="Gallery">
+  <section class="flex-1">
+    <div class="mx-auto max-w-3xl px-4 py-16 lg:px-10">
+      <div class="relative">
+        <!-- Soft glow frame -->
+        <div
+          class="pointer-events-none absolute -inset-6 rounded-3xl
+                 bg-gradient-to-r from-theme_accents/25 to-theme_accents/10
+                 blur-3xl"
+        >
+        </div>
+
+        <!-- Gallery card -->
+        <div
+          class="relative rounded-3xl bg-theme_text_light p-4 shadow-2xl sm:p-6 lg:p-10"
+        >
+          <GalleryCarousel client:only="react" />
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
