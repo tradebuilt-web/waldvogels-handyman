@@ -1,0 +1,64 @@
+---
+import MenuIcon from "~/assets/icons/MenuIcon.svg";
+import type { Page } from "~/data/content";
+
+const { pages, pathname } = Astro.props;
+
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+const cleanPathname = pathname.replace(basePath, "") || "/";
+---
+
+<div class="relative">
+  <button
+    aria-label="Open Menu"
+    data-menu-trigger
+    class="bg-theme_accents rounded p-1"
+  >
+    <img
+      src={MenuIcon.src ?? MenuIcon}
+      class="h-8 w-8 hover:cursor-pointer"
+      alt=""
+      draggable={false}
+    />
+  </button>
+  <div
+    data-dropdown-content
+    class="dropdown-content hidden absolute right-0 mt-2 w-48 bg-theme_content_bg border-theme_text_dark border rounded-md shadow-lg z-50"
+  >
+    <ul class="flex flex-col gap-1 p-2">
+      {
+        pages.map((page: Page) => {
+          const href = `${import.meta.env.BASE_URL.replace(/\/$/, "")}${page.url}`;
+
+          return (
+            <a
+              href={href}
+              class={
+                cleanPathname === page.url
+                  ? "font-bold"
+                  : "hover:text-gray-500 font-medium"
+              }
+            >
+              <li class="text-2xl hover:cursor-pointer cursor-pointer text-theme_text_dark">
+                {page.title}
+              </li>
+            </a>
+          );
+        })
+      }
+    </ul>
+  </div>
+</div>
+
+<script>
+  function toggleModal() {
+    const trigger = document.querySelector("[data-menu-trigger]");
+    if (!trigger) return;
+    const dropdownMenu = document.querySelector("[data-dropdown-content]");
+    trigger.addEventListener("click", () => {
+      dropdownMenu?.classList.toggle("hidden");
+    });
+  }
+
+  toggleModal();
+</script>
